@@ -20,7 +20,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('/proyectos', 'ProyectosController');
+Route::resource('/mesas', 'MesasController');
+
+Route::resource('totales', 'TotalesController');
 
 
 
