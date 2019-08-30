@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Mesa;
-use App\Candidato;
-use Alert;
 use Illuminate\Http\Request;
 
-class MesasController extends Controller
+class EscuelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +14,9 @@ class MesasController extends Controller
      */
     public function index()
     {
+        // $mesas = Mesa::where('id', '=', 1);
         $mesas = Mesa::all();
-
-        $candidatos = Candidato::all();
-
-        return view('mesas.index', compact('mesas', 'candidatos'));
+        return view('escuelas.index', compact('mesas'));
     }
 
     /**
@@ -41,24 +37,7 @@ class MesasController extends Controller
      */
     public function store(Request $request)
     {
-
-        $mesa = new Mesa();
-
-
-        $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $request->candidato_id,'mesa_id'=> $request->mesa_id, 'votos'=>$request->votos]);
-
-
-        // $mesa->candidatos()->sync($request->candidato_id);
-        // $mesa->candidatos()->sync($request->mesa_id);
-        // $mesa->candidatos()->sync($request->votos);
-
-        $candidato = Candidato::find($request->candidato_id);
-
-        $candidato->totalvotos = $candidato->totalvotos + $request->votos;
-
-        $candidato->save();
-
-        return redirect()->route('mesas.index');
+        //
     }
 
     /**

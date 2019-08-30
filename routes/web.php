@@ -24,6 +24,8 @@ Route::resource('/mesas', 'MesasController');
 
 Route::resource('totales', 'TotalesController');
 
+Route::resource('escuelas', 'EscuelasController');
+
 
 
 // Route::get('proyectos/create', 'ProyectosController@create')->name('proyectos.create');

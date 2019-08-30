@@ -18,6 +18,7 @@ class CreateCandidatosTable extends Migration
             $table->string('candidato')->unique();
             $table->string('lista');
             $table->integer('totalvotos');
+            $table->integer('tipo');
             $table->timestamps();
         });
     }

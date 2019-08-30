@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Candidato</th>
+                <th>Tipo</th>
                 <th>Votos</th>
                 <th>Mesa</th>
                 <th>Escuela</th>
@@ -26,6 +27,8 @@
                 @foreach ($mesa->candidatos as $candidato )
                     <tr>
                         <td>{{$candidato->candidato}}</td>
+
+                        <td>{{$candidato->tipo}}</td>
 
                         <td>{{$candidato->pivot->votos}}</td>
 

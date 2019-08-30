@@ -156,6 +156,8 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -212,6 +214,7 @@
     <!--Custom JavaScript -->
     {{-- <script src="js/custom.min.js"></script> --}}
     <script src="{{ asset('js/custom.min.js') }}"></script>
+
 </body>
 
 </html>

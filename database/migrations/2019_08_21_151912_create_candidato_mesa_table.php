@@ -22,6 +22,8 @@ class CreateCandidatoMesaTable extends Migration
 
             $table->foreign('candidato_id')->references('id')->on('candidatos');
             $table->foreign('mesa_id')->references('id')->on('mesas');
+
+            $table->unique(['candidato_id', 'mesa_id']);
         });
     }
 
