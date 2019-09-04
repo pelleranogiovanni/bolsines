@@ -215,6 +215,9 @@
     {{-- <script src="js/custom.min.js"></script> --}}
     <script src="{{ asset('js/custom.min.js') }}"></script>
 
+    {{-- <script src="{{ asset('js/jquery-2.1.0.min.js') }}"></script> --}}
+    <script src="{{ asset('js/dropdown.js') }}"></script>
+
 </body>
 
 </html>

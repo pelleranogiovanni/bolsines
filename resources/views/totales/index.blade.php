@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Candidato</th>
+                <th>Categoria</th>
                 <th>Total de Votos</th>
 
             </tr>
@@ -25,7 +26,10 @@
                     <tr>
                         <td>{{$candidato->candidato}}</td>
 
+                        <td>{{ $candidato->categoria->categoria }}</td>
+
                         <td>{{$candidato->totalvotos}}</td>
+
 
                     </tr>
 

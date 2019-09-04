@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Candidato;
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class TotalesController extends Controller
@@ -15,8 +16,9 @@ class TotalesController extends Controller
     public function index()
     {
         $candidatos = Candidato::all();
+        $categorias = Categoria::all();
 
-        return view('totales.index', compact('candidatos'));
+        return view('totales.index', compact('candidatos', 'categorias'));
     }
 
     /**

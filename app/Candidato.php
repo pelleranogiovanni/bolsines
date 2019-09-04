@@ -6,9 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidato extends Model
 {
-    protected $fillable = ['candidato', 'lista', 'mesa_id', 'candidato_id'];
+    protected $fillable = ['candidato', 'lista', 'mesa_id', 'candidato_id', 'categoria_id'];
 
     public function mesas(){
         return $this->belongsToMany('App\Mesa', 'candidato_mesa')->withPivot('candidato_id', 'votos');
+    }
+
+    public function categoria(){
+        return $this->belongsTo('App\Categoria');
+    }
+
+
+    public static function candidatos($id){
+    	return Candidato::where('categoria_id','=',$id)
+    	->get();
     }
 }

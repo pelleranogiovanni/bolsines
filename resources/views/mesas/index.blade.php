@@ -28,7 +28,7 @@
                     <tr>
                         <td>{{$candidato->candidato}}</td>
 
-                        <td>{{$candidato->tipo}}</td>
+                        <td>{{$candidato->categoria->categoria}}</td>
 
                         <td>{{$candidato->pivot->votos}}</td>
 
@@ -56,7 +56,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Votación</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -65,21 +65,33 @@
                 <form action="{{ route('mesas.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Votos" name="votos">
+                    <select name="categoria_id" id="categoria" class="form-control">
+                        @foreach ($categorias as $categoria)
+                            <option value="" hidden>Seleccionar la Categoría</option>
+                            <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
+                        @endforeach
+                    </select>
+                </div>
 
-                        <select name="candidato_id" id="" class="form-control">
-                            @foreach ($candidatos as $candidato )
-                                <option value="{{ $candidato->id }}">{{ $candidato->candidato }}</option>
-                            @endforeach
-                        </select>
+                <div class="form-group">
+                     <select name="candidato_id" id="candidato" class="form-control">
+                            <option value="" hidden>Seleccionar Candidato</option>
+                    </select>
+                </div>
 
-                        <select name="mesa_id" id="" class="form-control">
-                            @foreach ($mesas as $mesa )
-                                <option value="{{ $mesa->id }}">{{ $mesa->numero." - ".$mesa->escuela }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                <div class="form-group">
+                    <select name="mesa_id" id="" class="form-control">
+                        @foreach ($mesas as $mesa )
+                            <option value="{{ $mesa->id }}">{{ $mesa->numero." - ".$mesa->escuela }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="form-group">
+                   <input type="text" class="form-control" placeholder="Votos" name="votos">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
             </form>
             </div>
         </div>
