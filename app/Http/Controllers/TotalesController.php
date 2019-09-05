@@ -13,9 +13,10 @@ class TotalesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $candidatos = Candidato::all();
+        // $candidatos = Candidato::all();
+        $candidatos = Candidato::where('categoria_id', 'LIKE', $request->categoria_id)->get();
         $categorias = Categoria::all();
 
         return view('totales.index', compact('candidatos', 'categorias'));
@@ -50,7 +51,8 @@ class TotalesController extends Controller
      */
     public function show($id)
     {
-        //
+
+
     }
 
     /**
