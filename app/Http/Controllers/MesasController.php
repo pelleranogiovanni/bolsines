@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Mesa;
-use App\Candidato;
 use Alert;
+use App\Mesa;
+use App\Escuela;
+use App\Candidato;
 use App\Categoria;
 use Illuminate\Http\Request;
 
@@ -23,16 +24,27 @@ class MesasController extends Controller
 
         $categorias = Categoria::all();
 
-        return view('mesas.index', compact('mesas', 'candidatos', 'categorias'));
+        $escuelas = Escuela::all();
+
+        return view('mesas.index', compact('mesas', 'candidatos', 'categorias', 'escuelas'));
     }
 
-    //funcion javascript
+    //funcion javascript para candidatos
     public function getCandidatos(Request $request, $id){
         if($request->ajax()){
             $candidatos = Candidato::candidatos($id);
             return response()->json($candidatos);
         }
     }
+
+    //funcion javascript para mesas
+    public function getMesas(Request $request, $id){
+        if($request->ajax()){
+            $mesas = Mesa::mesas($id);
+            return response()->json($mesas);
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.

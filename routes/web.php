@@ -28,7 +28,7 @@ Route::resource('escuelas', 'EscuelasController');
 
 //agregado
 Route::get('candidatos/{id}', 'MesasController@getCandidatos');
-
+Route::get('mesas2/{id}', 'MesasController@getMesas');
 
 
 // Route::get('proyectos/create', 'ProyectosController@create')->name('proyectos.create');

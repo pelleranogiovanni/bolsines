@@ -34,7 +34,7 @@
 
                         <td>{{$mesa->numero}}</td>
 
-                        <td>{{ $mesa->escuela }}</td>
+                        <td>{{$mesa->escuela->escuela }}</td>
 
                     </tr>
 
@@ -62,10 +62,10 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('mesas.store') }}" method="POST">
+                <form action="{{ route('mesas.store') }}" method="POST" class="form-horizontal form-material">
                 @csrf
                 <div class="form-group">
-                    <select name="categoria_id" id="categoria" class="form-control">
+                    <select name="categoria_id" id="categoria" class="form-control form-control-line">
                         @foreach ($categorias as $categoria)
                             <option value="" hidden>Seleccionar la Categoría</option>
                             <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
@@ -74,21 +74,28 @@
                 </div>
 
                 <div class="form-group">
-                     <select name="candidato_id" id="candidato" class="form-control">
+                     <select name="candidato_id" id="candidato" class="form-control form-control-line">
                             <option value="" hidden>Seleccionar Candidato</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <select name="mesa_id" id="" class="form-control">
-                        @foreach ($mesas as $mesa )
-                            <option value="{{ $mesa->id }}">{{ $mesa->numero." - ".$mesa->escuela }}</option>
+                    <select name="escuela_id" id="escuela" class="form-control form-control-line">
+                        @foreach ($escuelas as $escuela)
+                            <option value="" hidden>Seleccionar la Escuela</option>
+                            <option value="{{ $escuela->id }}">{{ $escuela->escuela }}</option>
                         @endforeach
                     </select>
                 </div>
 
                 <div class="form-group">
-                   <input type="text" class="form-control" placeholder="Votos" name="votos">
+                    <select name="mesa_id" id="mesa" class="form-control form-control-line">
+                            <option value="" hidden>Seleccionar Mesa</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                   <input type="text" class="form-control form-control-line" placeholder="Votos" name="votos">
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>

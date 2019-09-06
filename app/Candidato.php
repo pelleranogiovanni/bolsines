@@ -16,7 +16,7 @@ class Candidato extends Model
         return $this->belongsTo('App\Categoria');
     }
 
-
+    //mandar los candidatos que coincidan con la categoria que recibe por parámetro
     public static function candidatos($id){
     	return Candidato::where('categoria_id','=',$id)
     	->get();
