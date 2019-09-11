@@ -8,7 +8,7 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
        Votar
 </button>
-
+{{ $mesas->links() }}
 <div class="card-text">
     <table class="table">
         <thead>
@@ -44,6 +44,8 @@
 
         </tbody>
     </table>
+
+
 
 </div>
 

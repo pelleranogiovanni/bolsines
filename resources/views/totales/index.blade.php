@@ -27,6 +27,7 @@
             <tr>
                 <th>Candidato</th>
                 <th>Categoria</th>
+                <th>Lista</th>
                 <th>Total de Votos</th>
 
             </tr>
@@ -40,6 +41,8 @@
 
                         <td>{{ $candidato->categoria->categoria }}</td>
 
+                        <td>{{$candidato->lista}}</td>
+
                         <td>{{$candidato->totalvotos}}</td>
 
 
@@ -51,6 +54,7 @@
 
         </tbody>
     </table>
+    {{ $candidatos->links() }}
 
 </div>
 

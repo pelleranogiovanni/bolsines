@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mesa;
+use App\Escuela;
 use Illuminate\Http\Request;
 
 class EscuelasController extends Controller
@@ -48,7 +49,10 @@ class EscuelasController extends Controller
      */
     public function show($id)
     {
-        //
+        $mesas = Mesa::where('escuela_id', 'LIKE', $id);
+        // $escuelas = Escuela::all();
+
+        return view('escuelas.show', compact('mesas'));
     }
 
     /**
@@ -59,7 +63,7 @@ class EscuelasController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mesa;
+use App\Escuela;
 use App\Candidato;
 use App\Categoria;
 use Illuminate\Http\Request;
@@ -16,11 +18,16 @@ class TotalesController extends Controller
     public function index(Request $request)
     {
         // $candidatos = Candidato::all();
-        $candidatos = Candidato::where('categoria_id', 'LIKE', $request->categoria_id)->get();
+        $candidatos = Candidato::orderBy('totalvotos', 'DESC')
+            ->where('categoria_id', 'LIKE', $request->categoria_id)
+            // ->get()
+            ->paginate(10);
+
         $categorias = Categoria::all();
 
         return view('totales.index', compact('candidatos', 'categorias'));
     }
+
 
     /**
      * Show the form for creating a new resource.

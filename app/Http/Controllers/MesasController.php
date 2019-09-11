@@ -18,7 +18,7 @@ class MesasController extends Controller
      */
     public function index()
     {
-        $mesas = Mesa::all();
+        $mesas = Mesa::orderBy('id', 'DESC')->paginate(4);
 
         $candidatos = Candidato::all();
 
