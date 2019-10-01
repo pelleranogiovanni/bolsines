@@ -65,21 +65,32 @@ class MesasController extends Controller
     public function store(Request $request)
     {
 
-        $mesa = new Mesa();
+        $mesa = Mesa::find($request->mesa);
+
+        $votos = $request->votos;
+        $candidatos = $request->candidato;
+        $longitud = count($candidatos);
+        $j=0;
+        for ($i=0; $i < $longitud; $i++) {
+
+            $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $candidatos[$j],'mesa_id'=> $request->mesa, 'votos'=> $votos[$j]]);
 
 
-        $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $request->candidato_id,'mesa_id'=> $request->mesa_id, 'votos'=>$request->votos]);
+            $candidato = Candidato::find($candidatos[$j]);
+            $candidato->totalvotos = $candidato->totalvotos + $votos[$j];
+            $candidato->save();
+
+            $j++;
+
+        }
 
 
-        // $mesa->candidatos()->sync($request->candidato_id);
-        // $mesa->candidatos()->sync($request->mesa_id);
-        // $mesa->candidatos()->sync($request->votos);
 
-        $candidato = Candidato::find($request->candidato_id);
+        // $candidato = Candidato::find($request->candidato_id);
 
-        $candidato->totalvotos = $candidato->totalvotos + $request->votos;
+        // $candidato->totalvotos = $candidato->totalvotos + $request->votos;
 
-        $candidato->save();
+        // $candidato->save();
 
         return redirect()->route('mesas.index');
     }
@@ -92,7 +103,10 @@ class MesasController extends Controller
      */
     public function show($id)
     {
-        //
+        $candidatos = Candidato::all();
+        $mesa = Mesa::find($id);
+
+        return view('mesas.show', compact('candidatos', 'mesa'));
     }
 
     /**
@@ -127,5 +141,11 @@ class MesasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function verMesas(){
+        $mesas = Mesa::all();
+
+        return view('mesas.vermesas', compact('mesas'));
     }
 }

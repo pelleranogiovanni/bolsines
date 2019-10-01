@@ -25,7 +25,9 @@ class TotalesController extends Controller
 
         $categorias = Categoria::all();
 
-        return view('totales.index', compact('candidatos', 'categorias'));
+        $sum = $candidatos->sum('totalvotos');
+
+        return view('totales.index', compact('candidatos', 'categorias', 'sum'));
     }
 
 

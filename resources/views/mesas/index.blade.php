@@ -8,6 +8,9 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
        Votar
 </button>
+
+<a  class="btn btn-success"  href="{{ route('ver-mesas') }}">Ver Mesas</a>
+
 {{ $mesas->links() }}
 <div class="card-text">
     <table class="table">

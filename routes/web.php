@@ -30,6 +30,7 @@ Route::resource('escuelas', 'EscuelasController');
 Route::get('candidatos/{id}', 'MesasController@getCandidatos');
 Route::get('mesas2/{id}', 'MesasController@getMesas');
 
+Route::get('ver-mesas', 'MesasController@verMesas')->name('ver-mesas');
 
 // Route::get('proyectos/create', 'ProyectosController@create')->name('proyectos.create');
 

@@ -29,6 +29,7 @@
                 <th>Categoria</th>
                 <th>Lista</th>
                 <th>Total de Votos</th>
+                <th>%</th>
 
             </tr>
         </thead>
@@ -44,6 +45,8 @@
                         <td>{{$candidato->lista}}</td>
 
                         <td>{{$candidato->totalvotos}}</td>
+
+                        <td>{{ $sum * $candidato->totalvotos / 100 }} %</td>
 
 
                     </tr>
