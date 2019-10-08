@@ -97,4 +97,21 @@ class TotalesController extends Controller
     {
         //
     }
+
+
+    public function totalesCategorias($id){
+
+        $candidatos = Candidato::orderBy('totalvotos', 'DESC')
+            ->where('categoria_id', 'LIKE', $id)
+            // ->get()
+            ->paginate(10);
+
+        $categorias = Categoria::find($id);
+
+        $sum = $candidatos->sum('totalvotos');
+
+        return view('totales.intendentes', compact('candidatos', 'categorias', 'sum'));
+    }
+
+
 }

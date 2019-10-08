@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Total Escuelas</h1>
+<h1>Total Mesas de Escuela: {{ $escuela->escuela }}</h1>
 
 
 
@@ -10,19 +10,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Escuela</th>
+                <th>Mesa</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($escuelas as $escuela)
+            @foreach ($mesas as $mesa)
+
+                @if ($mesa->escuela_id === $escuela->id)
+
 
                     <tr>
-                        <td><a href="{{ route('escuelas.show', $escuela->id) }}">{{$escuela->escuela}}</a></td>
+                        <td><a href="{{ route('mesas.show', $mesa->id) }}">{{$mesa->numero}}</a></td>
 
 
                     </tr>
 
+                @endif
             @endforeach
+
+
         </tbody>
     </table>
 

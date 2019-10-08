@@ -3,7 +3,7 @@
 @section('content')
 
 <h1>Mesa N° {{ $mesa->numero }} Escuela: {{ $mesa->escuela->escuela }}</h1>
-
+<h3>Categoria: {{ $categoria->categoria }}</h3>
 
 
 <div class="card-text">

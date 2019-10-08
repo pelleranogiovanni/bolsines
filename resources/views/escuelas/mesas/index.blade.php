@@ -2,16 +2,14 @@
 
 @section('content')
 
-<h1>Votos</h1>
+<h1>Votar Individualmente</h1>
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
        Votar
 </button>
 
-<a  class="btn btn-success"  href="{{ route('ver-mesas') }}">Ver Mesas</a>
 
-{{ $mesas->links() }}
 <div class="card-text">
     <table class="table">
         <thead>
@@ -48,7 +46,7 @@
         </tbody>
     </table>
 
-
+    {{ $mesas->links() }}
 
 </div>
 
@@ -67,7 +65,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('mesas.store') }}" method="POST" class="form-horizontal form-material">
+                <form action="{{ route('voto-individual') }}" method="POST" class="form-horizontal form-material">
                 @csrf
                 <div class="form-group">
                     <select name="categoria_id" id="categoria" class="form-control form-control-line">

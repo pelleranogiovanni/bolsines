@@ -16,8 +16,8 @@ class EscuelasController extends Controller
     public function index()
     {
         // $mesas = Mesa::where('id', '=', 1);
-        $mesas = Mesa::all();
-        return view('escuelas.index', compact('mesas'));
+        $escuelas = Escuela::all();
+        return view('escuelas.index', compact('escuelas'));
     }
 
     /**
@@ -49,10 +49,11 @@ class EscuelasController extends Controller
      */
     public function show($id)
     {
-        $mesas = Mesa::where('escuela_id', 'LIKE', $id);
-        // $escuelas = Escuela::all();
+        // $mesas = Mesa::where('escuela_id', 'LIKE', $id);
+        $mesas = Mesa::all();
+        $escuela = Escuela::find($id);
 
-        return view('escuelas.show', compact('mesas'));
+        return view('escuelas.show', compact('mesas', 'escuela'));
     }
 
     /**

@@ -18,7 +18,7 @@ class MesasController extends Controller
      */
     public function index()
     {
-        $mesas = Mesa::orderBy('id', 'DESC')->paginate(4);
+        $mesas = Mesa::orderBy('numero', 'ASC')->paginate(4);
 
         $candidatos = Candidato::all();
 
@@ -26,7 +26,23 @@ class MesasController extends Controller
 
         $escuelas = Escuela::all();
 
-        return view('mesas.index', compact('mesas', 'candidatos', 'categorias', 'escuelas'));
+        return view('escuelas.mesas.index', compact('mesas', 'candidatos', 'categorias', 'escuelas'));
+    }
+
+    //votar individualmente metodo para guardar
+    public function votoIndividual(Request $request){
+
+        $mesa = new Mesa();
+
+        $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $request->candidato_id,'mesa_id'=> $request->mesa_id, 'votos'=>$request->votos]);
+
+        $candidato = Candidato::find($request->candidato_id);
+
+        $candidato->totalvotos = $candidato->totalvotos + $request->votos;
+
+        $candidato->save();
+
+        return redirect()->route('mesas.index');
     }
 
     //funcion javascript para candidatos
@@ -92,7 +108,7 @@ class MesasController extends Controller
 
         // $candidato->save();
 
-        return redirect()->route('mesas.index');
+        return redirect()->route('mesas.show', $request->mesa);
     }
 
     /**
@@ -103,10 +119,11 @@ class MesasController extends Controller
      */
     public function show($id)
     {
-        $candidatos = Candidato::all();
+        $candidatos = Candidato::orderBy('totalvotos', 'DESC')->paginate(10);
         $mesa = Mesa::find($id);
+        $categorias = Categoria::all();
 
-        return view('mesas.show', compact('candidatos', 'mesa'));
+        return view('escuelas.mesas.categoriamesa', compact('candidatos', 'mesa', 'categorias'));
     }
 
     /**
@@ -140,7 +157,13 @@ class MesasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // $candidatos= 6;
+        // $mesa = 3;
+        // $votos=100;
+        // $managementUnit = Mesa::find(3);
+        // $managementUnit->candidatos()->where('id', 6)->wherePivot('votos', 100)->detach(3);
+
+
     }
 
     public function verMesas(){
@@ -148,4 +171,32 @@ class MesasController extends Controller
 
         return view('mesas.vermesas', compact('mesas'));
     }
+
+    public function mesasCategoria(Request $request){
+
+        $candidatos = Candidato::where('categoria_id', 'LIKE', $request->categoria_id)->get();
+        $mesa = Mesa::find($request->mesa_id);
+        $categoria =  Categoria::find($request->categoria_id);
+
+        return view('escuelas.mesas.show', compact('candidatos', 'mesa', 'categoria'));
+    }
+
+
+    public function eliminarvoto($candidato, $mesa, $voto){
+
+        $mesa = Mesa::find($mesa);
+
+        $candi = Candidato::find($candidato);
+
+        $candi->totalvotos = $candi->totalvotos - $voto;
+
+        $candi->save();
+
+        $mesa->candidatos()->detach([$candidato]);
+
+        return redirect()->route('mesas.show', $mesa);
+
+
+    }
+
 }
