@@ -11,4 +11,6 @@ class Categoria extends Model
     public function candidatos(){
         return $this->belongsToMany('App\Candidato');
     }
+
+
 }

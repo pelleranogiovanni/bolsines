@@ -2,8 +2,16 @@
 
 @section('content')
 
-<h1>Mesa N° {{ $mesa->numero }} Escuela: {{ $mesa->escuela->escuela }}</h1>
-<h3>Categoria: {{ $categoria->categoria }}</h3>
+<div class="row">
+    <div class="col-md-8">
+        <h1>Mesa N° {{ $mesa->numero }} Escuela: {{ $mesa->escuela->escuela }}</h1>
+        <h3>Categoria: {{ $categoria->categoria }}</h3>
+    </div>
+
+    <div class="col-md-4">
+        <a href="{{ route('mesas.show', $mesa->id) }}" class="btn btn-info">Volver <i class="mdi mdi-arrow-left-drop-circle-outline"></i></a>
+    </div>
+</div>
 
 
 <div class="card-text">
@@ -34,15 +42,19 @@
 
 
                         </tr>
-
-
                 @endforeach
-                <button type="submit" class="btn btn-success">Guardar</button>
+
+
+                    <tr>
+                       <td><button type="submit" class="btn btn-success">Guardar <i class="mdi mdi-check-circle-outline"></i></button></td>
+                    </tr>
+
             </form>
 
 
         </tbody>
     </table>
+
 
 
 

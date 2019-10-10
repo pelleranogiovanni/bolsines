@@ -6,7 +6,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-       Votar
+       Cargar votación <i class="mdi mdi-email-open"></i>
 </button>
 
 
@@ -45,8 +45,6 @@
 
         </tbody>
     </table>
-
-    {{ $mesas->links() }}
 
 </div>
 

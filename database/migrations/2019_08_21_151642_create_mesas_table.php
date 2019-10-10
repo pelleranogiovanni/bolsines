@@ -15,7 +15,14 @@ class CreateMesasTable extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('numero');
+            $table->integer('circuito');
+            $table->string('tipo');
+            $table->integer('numero');
+            // $table->integer('blancos');
+            // $table->integer('nulos');
+            // $table->integer('recurridos');
+            // $table->integer('impugnados');
+            // $table->integer('totalsufragios');
             $table->unsignedBigInteger('escuela_id');
             $table->timestamps();
 

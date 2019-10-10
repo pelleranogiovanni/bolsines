@@ -49,9 +49,10 @@ class EscuelasController extends Controller
      */
     public function show($id)
     {
-        // $mesas = Mesa::where('escuela_id', 'LIKE', $id);
-        $mesas = Mesa::all();
+        // $mesas = Mesa::all();
         $escuela = Escuela::find($id);
+
+        $mesas = Mesa::where('escuela_id', 'LIKE', $id)->get();
 
         return view('escuelas.show', compact('mesas', 'escuela'));
     }

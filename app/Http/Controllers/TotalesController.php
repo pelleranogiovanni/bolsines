@@ -21,13 +21,13 @@ class TotalesController extends Controller
         $candidatos = Candidato::orderBy('totalvotos', 'DESC')
             ->where('categoria_id', 'LIKE', $request->categoria_id)
             // ->get()
-            ->paginate(10);
+            ->get();
 
         $categorias = Categoria::all();
 
         $sum = $candidatos->sum('totalvotos');
 
-        return view('totales.index', compact('candidatos', 'categorias', 'sum'));
+        return view('totales.index', compact('candidatos', 'categorias', 'sum',));
     }
 
 
@@ -104,13 +104,56 @@ class TotalesController extends Controller
         $candidatos = Candidato::orderBy('totalvotos', 'DESC')
             ->where('categoria_id', 'LIKE', $id)
             // ->get()
-            ->paginate(10);
+            ->get();
 
         $categorias = Categoria::find($id);
 
         $sum = $candidatos->sum('totalvotos');
 
-        return view('totales.intendentes', compact('candidatos', 'categorias', 'sum'));
+        //Blancos
+        $blancos = Candidato::where('categoria_id', 'LIKE', 5)
+            ->where('lista', 'LIKE', $id)
+            ->get();
+
+        //Nulos
+         $nulos = Candidato::where('categoria_id', 'LIKE', 6)
+        ->where('lista', 'LIKE', $id)
+        ->get();
+
+        //Recurridos
+        $recurridos = Candidato::where('categoria_id', 'LIKE', 7)
+        ->where('lista', 'LIKE', $id)
+        ->get();
+
+        //Impugnados
+        $impugnados = Candidato::where('categoria_id', 'LIKE', 8)
+        ->where('lista', 'LIKE', $id)
+        ->get();
+
+        //Blancos
+        foreach ($blancos as $blanco) {
+            $votosblancos = $blanco->totalvotos;
+        }
+
+        //Nulos
+        foreach ($nulos as $nulo) {
+            $votosnulos = $nulo->totalvotos;
+        }
+
+        //Recurridos
+        foreach ($recurridos as $recurrido) {
+            $votosrecurridos = $recurrido->totalvotos;
+        }
+
+        //Impugnados
+        foreach ($impugnados as $impugnado) {
+            $votosimpugnados = $impugnado->totalvotos;
+        }
+
+        $totalsufragios = $sum + $votosblancos + $votosnulos + $votosrecurridos + $votosimpugnados;
+
+
+        return view('totales.intendentes', compact('candidatos', 'categorias', 'sum', 'votosblancos', 'votosnulos', 'votosrecurridos', 'votosimpugnados', 'totalsufragios'));
     }
 
 

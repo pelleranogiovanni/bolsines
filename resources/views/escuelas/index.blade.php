@@ -11,15 +11,15 @@
         <thead>
             <tr>
                 <th>Escuela</th>
+                <th>Domicilio</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($escuelas as $escuela)
 
                     <tr>
-                        <td><a href="{{ route('escuelas.show', $escuela->id) }}">{{$escuela->escuela}}</a></td>
-
-
+                        <td><i class="mdi mdi-school text-muted"><a href="{{ route('escuelas.show', $escuela->id) }}"> {{$escuela->escuela}}</a></td>
+                        <td>{{ $escuela->domicilio }}</td>
                     </tr>
 
             @endforeach

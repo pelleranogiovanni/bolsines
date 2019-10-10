@@ -18,7 +18,7 @@ class MesasController extends Controller
      */
     public function index()
     {
-        $mesas = Mesa::orderBy('numero', 'ASC')->paginate(4);
+        $mesas = Mesa::orderBy('numero', 'ASC')->get();
 
         $candidatos = Candidato::all();
 
@@ -100,6 +100,9 @@ class MesasController extends Controller
 
         }
 
+        $mesa->save();
+
+
 
 
         // $candidato = Candidato::find($request->candidato_id);
@@ -119,7 +122,7 @@ class MesasController extends Controller
      */
     public function show($id)
     {
-        $candidatos = Candidato::orderBy('totalvotos', 'DESC')->paginate(10);
+        $candidatos = Candidato::orderBy('candidato', 'DESC')->get();
         $mesa = Mesa::find($id);
         $categorias = Categoria::all();
 
@@ -177,6 +180,8 @@ class MesasController extends Controller
         $candidatos = Candidato::where('categoria_id', 'LIKE', $request->categoria_id)->get();
         $mesa = Mesa::find($request->mesa_id);
         $categoria =  Categoria::find($request->categoria_id);
+
+
 
         return view('escuelas.mesas.show', compact('candidatos', 'mesa', 'categoria'));
     }
