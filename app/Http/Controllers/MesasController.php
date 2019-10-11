@@ -8,6 +8,7 @@ use App\Escuela;
 use App\Candidato;
 use App\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class MesasController extends Controller
 {
@@ -32,19 +33,25 @@ class MesasController extends Controller
     //votar individualmente metodo para guardar
     public function votoIndividual(Request $request){
 
-        $mesa = new Mesa();
+        try {
 
-        $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $request->candidato_id,'mesa_id'=> $request->mesa_id, 'votos'=>$request->votos]);
+            $mesa = new Mesa();
 
-        $candidato = Candidato::find($request->candidato_id);
+            $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $request->candidato_id,'mesa_id'=> $request->mesa_id, 'votos'=>$request->votos]);
 
-        $candidato->totalvotos = $candidato->totalvotos + $request->votos;
+            $candidato = Candidato::find($request->candidato_id);
 
-        $candidato->save();
+            $candidato->totalvotos = $candidato->totalvotos + $request->votos;
 
-        alert()->success('Se ha registrado el voto', 'Éxito!');
+            $candidato->save();
 
-        return redirect()->route('mesas.index');
+            alert()->success('Se ha registrado el voto', 'Éxito!');
+
+            return redirect()->route('mesas.index');
+
+            } catch (\Illuminate\Database\QueryException $exception){
+                return redirect()->route('mesas.index')->with('warning', 'Ya has votado en esa mesa!');
+            }
     }
 
     //funcion javascript para candidatos
@@ -82,32 +89,39 @@ class MesasController extends Controller
      */
     public function store(Request $request)
     {
-
-        $mesa = Mesa::find($request->mesa);
-
-        $votos = $request->votos;
-        $candidatos = $request->candidato;
-        $longitud = count($candidatos);
-        $j=0;
-
-        for ($i=0; $i < $longitud; $i++) {
-
-            $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $candidatos[$j],'mesa_id'=> $request->mesa, 'votos'=> $votos[$j]]);
+        try {
 
 
-            $candidato = Candidato::find($candidatos[$j]);
-            $candidato->totalvotos = $candidato->totalvotos + $votos[$j];
-            $candidato->save();
+            $mesa = Mesa::find($request->mesa);
 
-            $j++;
+            $votos = $request->votos;
+            $candidatos = $request->candidato;
+            $longitud = count($candidatos);
+            $j=0;
 
-        }
+            for ($i=0; $i < $longitud; $i++) {
 
-        $mesa->save();
-
-        alert()->success('Se ha registrado el voto', 'Éxito!');
+                $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $candidatos[$j],'mesa_id'=> $request->mesa, 'votos'=> $votos[$j]]);
 
 
+                $candidato = Candidato::find($candidatos[$j]);
+                $candidato->totalvotos = $candidato->totalvotos + $votos[$j];
+                $candidato->save();
+
+                $j++;
+
+            }
+
+            $mesa->save();
+
+            alert()->success('Se ha registrado el voto', 'Éxito!');
+            return redirect()->route('mesas.show', $request->mesa);
+
+            } catch (\Illuminate\Database\QueryException $exception){
+                // alert()->error('Ya has votado en esa mesa', 'Error!');
+                return redirect()->route('mesas.show', $request->mesa)->with('warning', 'Ya has votado en esa mesa!');
+
+            }
 
 
         // $candidato = Candidato::find($request->candidato_id);
@@ -116,7 +130,7 @@ class MesasController extends Controller
 
         // $candidato->save();
 
-        return redirect()->route('mesas.show', $request->mesa);
+
     }
 
     /**

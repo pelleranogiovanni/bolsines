@@ -29,7 +29,7 @@
 
 
 <div class="card-text">
-    <table class="table table-responsive">
+    <table class="table">
         <thead>
             <tr>
                 <th>Candidato</th>

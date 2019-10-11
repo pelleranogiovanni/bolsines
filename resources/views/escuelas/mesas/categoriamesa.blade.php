@@ -62,7 +62,7 @@
                         <td>{{$mesa->escuela->escuela }}</td>
 
                         <td>
-                            <a href="{{route('mesas.eliminarvoto', [$candidato->id, $mesa->id, $candidato->pivot->votos])}}" class="btn btn-outline-danger btn-sm mr-1" onclick="return confirm('¿Seguro desea borrar el voto de la mesa {{$mesa->numero}} de la {{ $mesa->escuela->escuela }}?')"><i class="fa fa-trash"></i></a>
+                            <a href="{{route('mesas.eliminarvoto', [$candidato->id, $mesa->id, $candidato->pivot->votos])}}" class="btn btn-outline-danger btn-sm mr-1" onclick="return confirm('¡ATENCIÓN! ¿Seguro desea borrar el voto de {{ $candidato->candidato }} correspondiente a la mesa {{$mesa->numero}} de la {{ $mesa->escuela->escuela }}?')"><i class="fa fa-trash"></i></a>
                         </td>
 
                     </tr>
