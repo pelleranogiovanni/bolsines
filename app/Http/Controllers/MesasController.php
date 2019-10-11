@@ -42,6 +42,8 @@ class MesasController extends Controller
 
         $candidato->save();
 
+        alert()->success('Se ha registrado el voto', 'Éxito!');
+
         return redirect()->route('mesas.index');
     }
 
@@ -87,6 +89,7 @@ class MesasController extends Controller
         $candidatos = $request->candidato;
         $longitud = count($candidatos);
         $j=0;
+
         for ($i=0; $i < $longitud; $i++) {
 
             $mesa->candidatos()->attach('candidato_id', ['candidato_id' => $candidatos[$j],'mesa_id'=> $request->mesa, 'votos'=> $votos[$j]]);
@@ -101,6 +104,8 @@ class MesasController extends Controller
         }
 
         $mesa->save();
+
+        alert()->success('Se ha registrado el voto', 'Éxito!');
 
 
 
@@ -199,7 +204,7 @@ class MesasController extends Controller
 
         $mesa->candidatos()->detach([$candidato]);
 
-        return redirect()->route('mesas.show', $mesa);
+        return redirect()->route('mesas.show', $mesa)->with('warning', 'Acabas de eliminar una votación!');
 
 
     }

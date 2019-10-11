@@ -11,7 +11,7 @@
 
 
 <div class="card-text">
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>Candidato</th>
@@ -27,11 +27,11 @@
 
                 @foreach ($mesa->candidatos as $candidato )
                     <tr>
-                        <td>{{$candidato->candidato}}</td>
+                        <td><p class="font-weight-bold">{{$candidato->candidato}}</td>
 
                         <td>{{$candidato->categoria->categoria}}</td>
 
-                        <td>{{$candidato->pivot->votos}}</td>
+                        <td><span class="badge badge-info">{{$candidato->pivot->votos}}</td>
 
                         <td>{{$mesa->numero}}</td>
 
@@ -66,7 +66,7 @@
                 <form action="{{ route('voto-individual') }}" method="POST" class="form-horizontal form-material">
                 @csrf
                 <div class="form-group">
-                    <select name="categoria_id" id="categoria" class="form-control form-control-line">
+                    <select name="categoria_id" id="categoria" class="form-control form-control-line" required>
                         @foreach ($categorias as $categoria)
                             <option value="" hidden>Seleccionar la Categoría</option>
                             <option value="{{ $categoria->id }}">{{ $categoria->categoria }}</option>
@@ -75,13 +75,13 @@
                 </div>
 
                 <div class="form-group">
-                     <select name="candidato_id" id="candidato" class="form-control form-control-line">
+                     <select name="candidato_id" id="candidato" class="form-control form-control-line" required>
                             <option value="" hidden>Seleccionar Candidato</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <select name="escuela_id" id="escuela" class="form-control form-control-line">
+                    <select name="escuela_id" id="escuela" class="form-control form-control-line" required>
                         @foreach ($escuelas as $escuela)
                             <option value="" hidden>Seleccionar la Escuela</option>
                             <option value="{{ $escuela->id }}">{{ $escuela->escuela }}</option>
@@ -90,13 +90,13 @@
                 </div>
 
                 <div class="form-group">
-                    <select name="mesa_id" id="mesa" class="form-control form-control-line">
+                    <select name="mesa_id" id="mesa" class="form-control form-control-line" required >
                             <option value="" hidden>Seleccionar Mesa</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                   <input type="text" class="form-control form-control-line" placeholder="Votos" name="votos">
+                   <input type="number" class="form-control form-control-line" placeholder="Votos" name="votos" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Guardar</button>

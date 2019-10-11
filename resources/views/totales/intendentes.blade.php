@@ -23,11 +23,12 @@
 
 @endswitch
 
+<hr>
 
 
 
 <div class="card-text">
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>Partido</th>

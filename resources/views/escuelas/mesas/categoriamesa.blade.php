@@ -34,7 +34,7 @@
 
 {{-- Listar votos de la mesa --}}
 <div class="card-text">
-    <table class="table">
+    <table class="table table-responsive">
         <thead>
             <tr>
                 <th>Candidato</th>
@@ -51,11 +51,11 @@
 
                 @foreach ($mesa->candidatos as $candidato )
                     <tr>
-                        <td>{{$candidato->candidato}}</td>
+                        <td><p class="font-weight-bold">{{$candidato->candidato}}</td>
 
                         <td>{{$candidato->categoria->categoria}}</td>
 
-                        <td>{{$candidato->pivot->votos}}</td>
+                        <td><span class="badge badge-info">{{$candidato->pivot->votos}}</td>
 
                         <td>{{$mesa->numero}}</td>
 
