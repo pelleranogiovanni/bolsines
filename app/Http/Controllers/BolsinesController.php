@@ -2,18 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Bolsine;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreBolsin;
 
-class CandidatosController extends Controller
+class BolsinesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $dni = $request->dni;
+        $apellido = $request->apellido;
+
+        $bolsines = Bolsine::orderBy('created_at', 'DESC')
+            ->dni($dni)
+            ->apellido($apellido)
+            ->paginate(25);
+
+        $total = $bolsines->count();
+
+        return view('bolsines.index', compact('bolsines', 'total'));
     }
 
     /**
@@ -23,7 +35,7 @@ class CandidatosController extends Controller
      */
     public function create()
     {
-        //
+        return view('bolsines.create');
     }
 
     /**
@@ -32,9 +44,13 @@ class CandidatosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreBolsin $request)
     {
-        //
+        $bolsin = Bolsine::create($request->all());
+
+        alert()->success('Se ha registrado el bolsin', 'Éxito!');
+
+        return back();
     }
 
     /**

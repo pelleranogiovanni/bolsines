@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCandidatosTable extends Migration
+class CreateBolsinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateCandidatosTable extends Migration
      */
     public function up()
     {
-        Schema::create('candidatos', function (Blueprint $table) {
+        Schema::create('bolsines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('candidato')->unique();
-            $table->string('lista');
-            $table->integer('totalvotos');
-            $table->unsignedBigInteger('categoria_id');
+            $table->string('apellido');
+            $table->string('nombre');
+            $table->integer('dni')->unique();
+            $table->integer('box');
             $table->timestamps();
-
-            $table->foreign('categoria_id')->references('id')->on('categorias');
         });
     }
 
@@ -32,6 +30,6 @@ class CreateCandidatosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('candidatos');
+        Schema::dropIfExists('bolsines');
     }
 }
