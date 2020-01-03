@@ -3,7 +3,7 @@
 @section('content')
 
 <h1>Bolsines Registrados</h1>
-<span class="badge badge-info">Total de Registros: {{ $total }}</span>
+{{-- <span class="badge badge-info">Total de Registros: {{ $total }}</span> --}}
 <hr>
 
 
@@ -49,6 +49,7 @@
                 <th>DNI</th>
                 <th>Box</th>
                 <th>Fecha</th>
+                <th>Acción</th>
             </tr>
         </thead>
         <tbody>
@@ -63,6 +64,10 @@
                         <td>{{$bolsin->box}}</td>
 
                         <td>{{ $bolsin->created_at }}</td>
+
+                        <td>
+                            <a href="{{route('bolsines.edit', $bolsin->id)}}" class="btn btn-outline-primary btn-sm mr-1" onclick="return confirm('¡ATENCIÓN! ¿Seguro desea borrar el registro? }}"><i class="mdi mdi-account-edit"></i></a>
+                        </td>
                     </tr>
                 @empty
                     <div class="alert alert-info alert-dismissible">

@@ -31,5 +31,15 @@
 </div>
 
 
+<div class="col-lg-12 col-md-12">
+    <div class="card">
+        <div class="card-block">
+            <h3 class="card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Total de Bolsines Entregados </font></font></h3>
+            <h3 class="card-subtitle"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">{{ $total }} </font></font></h3>
+
+        </div>
+    </div>
+</div>
+
 
 @endsection

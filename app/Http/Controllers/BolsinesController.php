@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Bolsine;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreBolsin;
+use App\Http\Requests\UpdateBolsin;
 
 class BolsinesController extends Controller
 {
@@ -72,7 +73,9 @@ class BolsinesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $bolsin = Bolsine::find($id);
+
+        return view('bolsines.edit', compact('bolsin'));
     }
 
     /**
@@ -82,9 +85,18 @@ class BolsinesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateBolsin $request, $id)
     {
-        //
+        $bolsin = Bolsine::find($id);
+
+        // $validated = $request->validated();
+
+
+        $bolsin->update($request->all());
+
+        alert()->success('Se ha actualizado el bolsin', 'Éxito!');
+
+        return redirect()->route('bolsines.index');
     }
 
     /**
